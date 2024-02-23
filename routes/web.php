@@ -1,6 +1,12 @@
 <?php
 
-// use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +24,9 @@
 // });
 
 // == BASIC ROUTING ==
-use Illuminate\Support\Facades\Route;
 
-Route::get('/hello', function() {
-return 'Hello World'; });
+// Route::get('/hello', function() {
+// return 'Hello World'; });
  
 Route::get('/world', function () {   
 return 'World'; 
@@ -31,10 +36,10 @@ Route::get('/pesan', function() {
     return 'Selamat Datang';
 });
 
-Route::get('/about', function() {
-    return 'Nama : Zaki Lazuardi Ferysa Putra 
-    NIM : 2241720101';
-});
+// Route::get('/about', function() {
+//     return 'Nama : Zaki Lazuardi Ferysa Putra 
+//     NIM : 2241720101';
+// });
 
 // == ROUTE PARAMETERS ==
 Route::get('/user/{name}', function($name) {
@@ -98,3 +103,21 @@ Route::redirect('/here', '/there');
 // == VIEW ROUTES ==
 Route::view('/welcome', 'welcome'); 
 Route::view('/welcome', 'welcome', ['name' => 'Taylor']); 
+
+// == MEMBUAT CONTROLLER ==
+Route::get('/hello', [WelcomeController::class,'hello']);
+
+// Route::get('/', [PageController::class, 'index']);
+// Route::get('/about', [PageController::class, 'about']);
+// Route::get('/articles/{id}', [PageController::class, 'articles']);
+
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/about', [AboutController::class, 'index']);
+Route::get('/articles/{id}', [ArticleController::class, 'index']);
+
+// == RESOURCE CONTROLLER ==
+Route::resource('photos', PhotoController::class); 
+
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy'
+]);
