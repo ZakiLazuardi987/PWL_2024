@@ -125,3 +125,17 @@ Route::resource('photos', PhotoController::class)->only([
 Route::resource('photos', PhotoController::class)->except([
     'create', 'store', 'update', 'destroy'
 ]);
+
+// == VIEW ==
+// Route::get('/greeting', function() {
+//     return view('hello', ['name' => 'Zaki']);
+// });
+
+// Route::get('/greeting', function() {
+//     return view('blog.hello', ['name' => 'Zaki']);
+// });
+
+// == Menampilkan View dari Controller ==
+Route::get('/greeting', [WelcomeController::class, 'greeting']);
+
+// == Meneruskan data ke view ==
